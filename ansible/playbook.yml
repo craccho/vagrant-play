@@ -3,26 +3,20 @@
 
 - hosts: all
   tasks:
-  - name: setup vim
-    import_role: name=vim
-  - name: install required packages
-    apt:
-      name: 
-      - virtualenv
-      - python-pip
-      - lxc-dev
-      - lxc-utils
-      - lxc-templates
-    become: yes
-  - name: install required module for lxc
-    pip:
-      name: lxc-python2
   - name: setup lxc
-    lxc_container:
-      name: test
-      container_log: true
-      template: ubuntu
-      state: started
-      template_options: --release xenial
-    become: yes
+    import_role:
+      name: lxc
+    tags:
+    - lxc
 
+  - name: tools
+    import_role:
+      name: tools
+    tags:
+    - tools
+
+  - name: ansible
+    import_role:
+      name: ansible
+    tags:
+    - ansible

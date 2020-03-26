@@ -1,0 +1,6 @@
+---
+- name: Make sure lovely tools installed
+  apt:
+    name:
+    - lv
+  become: yes
